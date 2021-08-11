@@ -1,21 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { MaterialIcons } from '@expo/vector-icons'; 
+import Drawer from './routes/DrawerNav';
+import CustomDrawerContent from './components/CustomDrawerContent'
+import BottomTabNav from './routes/BottomTabNav';
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator
+        drawerContent={ props => <CustomDrawerContent {...props} /> }
+      >
+        <Drawer.Screen 
+          name="Home" 
+          component={BottomTabNav} 
+          options={{ 
+            title: "Accueil",
+            drawerIcon: () => <MaterialIcons name="home" size={24} color="white" />
+          }}/>
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
